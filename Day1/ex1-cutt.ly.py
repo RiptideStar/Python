@@ -5,7 +5,7 @@
 # Usage: <cmd> full_long_url [short_name]
 # Output: Shortened URL: https://cutt.ly/short_name
 
-import requests
+import requests #pip install requests
 import sys
 
 print("--- Command Line:", sys.argv)

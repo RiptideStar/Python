@@ -1,4 +1,5 @@
-import pyqrcode #pip install pyqrcode
+import pyqrcode #pip install pyqrcode 
+                #pip install pypng
 
 import sys
 
