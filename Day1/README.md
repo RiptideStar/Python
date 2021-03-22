@@ -14,7 +14,7 @@ We use this project to strengthen our understanding of these concepts:
 8. What is HTTP call headers, query parameters, payload (body)?
 9. What is cookie ? 
 10. What is html, xml, and json?
- 
+
 ## Key Points:
 
 * The programming interface ([API](API.png)) has penetrated into every corner of your life like air and water. For example, all apps on your mobile phone, like Youtube, communicate with the server through APIs.
