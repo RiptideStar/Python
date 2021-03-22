@@ -1,70 +1,71 @@
 # Shorten URL with Python
 
-## 重要概念
+## Basic Concepts
 
-我们通过这个项目来学习加强对这些概念的理解:
+We use this project to strengthen our understanding of these concepts:
 
-1. 什么是API
-2. 什么是 WEB API
-3. 什么是 REST API
-4. 为什么 API 非常重要? 
-5. 什么是HTTP? 他最常用的两个请求方法(methods)是什么? 
-6. HTTP 和 REST API 是什么关系? 
-7. 什么是 Base64 Encoding? 主要用在什么地方?
-8. 什么是 IP 地址? 和 DNS 什么关系?
-9. 什么是 HTTP call (请求)的 headers, query parameters, payload (body)? 各有什么用？ 
-10. 什么是 cookie ? 有什么用？ 
-11. 什么是 html, xml 和 json? 他们之间是何关系?
+1. What is API
+2. What is WEB API
+3. What is REST API
+4. Why API is important? 
+5. What is HTTP? What are the main methods? 
+6. Relationship of HTTP & REST API? 
+7. What is IP address? and DNS?
+8. What is HTTP call headers, query parameters, payload (body)?
+9. What is cookie ? 
+10. What is html, xml, and json?
+ 
+## Key Points:
+
+* The programming interface ([API](API.png)) has penetrated into every corner of your life like air and water. For example, all apps on your mobile phone, like Youtube, communicate with the server through APIs.
+* Each URL is actually a REST API. REST API is the most common and most widely used [WEB API](http.jpeg).
+* Every web page browse is an [HTTP request](CRUD_diagram.png). Every HTTP request calls a REST API.
+* Leaving the WEB API, you can’t make any progress: You can’t shop online, you can’t transfer money online, you can’t watch Youtube videos, you can’t take a Uber/Grubhub...
+
+These are some important concepts that this project will involve. In fact, you use these things every day. You just don’t notice that they are happening around you all the time. After understanding these concepts, you will clearly know what happens behind scene every time you browse the web or operate the mobile App.
+- Not only knowing what, but also knowing why.
+
+## Project background and use case scenarios
+1. Everyone may have encountered: The URL to be shared is very long and it is inconvenient to put on social media (Youtube, Twitter).
+2. Some programs or websites need to provide services to shorten URLs, such as Twitter, which cannot exceed 140 characters.
+
+For example: You have such a URL: too long, hard to remember, hard to share
+https://docs.google.com/document/d/e/2PACX-1vSGOa_JPD28lJBVwxM7eaoXVJz-wkGsYXiiTe7rnnxCRs6SJwMdqaOeYLup9W-6nmG6y7jb6_BehI4K/pub
+
+You definitely want to shorten it to a memorable URL
+You have two approaches:
+1. Go to the website that provides the service, manually enter your website address, and then let this website shorten your website address for you.
+2. Call the API provided by the service website, and realize it by your own programming method.
    
-* 程序接口(API)就像空气和水一样，已经渗透到你们生活学习中的每一个角落。比如你们的手机上所有的App包括微信都是通过API和后面的服务器进行对话。
-* 每一个网址其实都是一个 REST API. REST API 是最常见应用最广泛的 WEB API。 
-* 每一个网页的浏览, 都是一个HTTP请求. 每一个HTTP请求都是调用一个 REST API. 
-* 离开了 WEB API, 你寸步难行: 不能网上购物，不能网上转账，不能发微信, 不能打车出行...
-
-这些是这个项目会涉及到的一些重要概念。 大家在视频中，如果能够分别阐述自己对他们的理解，那就很好。👍👍
-在这些项目中，加深对这些概念的理解，对你们将来的工作和学习会有很大的帮助。 
-其实你们天天都在用这些东西. 只不过没有注意到他们时时刻刻发生在身边而已。 理解这些概念以后, 就会清晰知道每次浏览网页或者手机App操作背后发生了什么. 
--- 不仅知其然，还有知其所以然。
+If you need to process a lot or get this service in a program, then programming to achieve it is your only choice.
 
 
-## 项目背景和使用场景
-1. 大家很可能都遇到过: 要分享的网址很长, 放到社交媒体(微博,微信)上不方便, 怎么办? 
-2. 有些程序或者网站需要提供缩短网址的服务, 比如 Twitter 和微博不能超过140个字符。 
+## Call the third-party WEB API to shorten the URL service
 
-比如: 你有这样一个网址: 太长，不好记, 不好分享 --
-https://example.com/assets/guangxi/nannin/medical_school/my_cs2_1948/exercises/project1/qqqwwweeerrrttt1234561222978
-
-你肯定想把它缩短成一个好记的网址。
-你有两种做法:
-1. 到提供该服务的网站上去, 人工输入你的网址，然后让这个网站给你缩短你的网址。 
-2. 调用服务网站提供都API, 自己编程的方法来实现。 
-   
-如果你要大量处理，或者在程序中来获取这个服务, 那编程来实现是你唯一的选择。 
-
-
-## 调用第三方 WEB API 来实现缩短网址服务
-
-搜索一下就发现有好多网站提供这样的服务。我们今天来一起探讨一下两个比较常见的网站 --
+A search reveals that there are many websites that provide such services. Let's discuss two more common websites together today -
 1. cutt.ly
 2. bit.ly
 
-### Cutt.ly 网站和API
+### Cutt.ly website and API
 
-1. 注册
-2. 查阅API 文档: https://cutt.ly/api-documentation/cuttly-links-api
-3. API Key: e77a2e10762f46d8be84d47974d4703310301
-4. Python 分四步:
-   1. 获取参数
-   2. 构建REST API URL: `--- api_url:  https://cutt.ly/api/api.php?key=e77a2e10762f46d8be84d47974d4703310301&short=https://example.com/assets/guangxi/nannin/medical_school/my_cs2_1948/exercises/project1/qqqwwweeerrrttt1234561222978&name=cs1948`
-   3. Call REST API (GET) 缩短网址
-   4. 分析返回值
+1. Registration
+2. Check the API documentation: https://cutt.ly/api-documentation/cuttly-links-api
+3. API Key: 123456789123456789123456789 (fake key! replace this API key with your own, find yours in your profile in cuttly)
+4. Python is divided into four steps:
+   1. Get parameters
+   2. Construct REST API URL: `--- api_url: https://cutt.ly/api/api.php?key=123456789123456789123456789&short=https://docs.google.com/document/d/e/2PACX-1vSGOa_JPD28lJBVwxM7eaoXVJz-wkGsYXiiTe7rnnxCRs6SJwMdqaOeYLup9W-6nmG6y7jb6_BehI4K/pub&name=pythonWEB`
+   3. Call REST API (GET) shorten URL
+   4. Analyze the return value
    
 Example:
 ```
-python3 ex1-cutt.ly.py https://example.com/assets/guangxi/nannin/medical_school/my_cs2_1948/exercises/project1/qqqwwweeerrrttt1234561222978 cs1948
+python3 ex1-cutt.ly.py https://docs.google.com/document/d/e/2PACX-1vSGOa_JPD28lJBVwxM7eaoXVJz-wkGsYXiiTe7rnnxCRs6SJwMdqaOeYLup9W-6nmG6y7jb6_BehI4K/pub pythonShort
 
---- 命令行参数: ['ex1-cutt.ly.py', 'https://example.com/assets/guangxi/nannin/medical_school/my_cs2_1948/exercises/project1/qqqwwweeerrrttt1234561222978', 'cs1948']
---- api_url:  https://cutt.ly/api/api.php?key=e77a2e10762f46d8be84d47974d4703310301&short=https://example.com/assets/guangxi/nannin/medical_school/my_cs2_1948/exercises/project1/qqqwwweeerrrttt1234561222978&name=cs1948
---- data:  {'status': 7, 'fullLink': 'https://example.com/assets/guangxi/nannin/medical_school/my_cs2_1948/exercises/project1/qqqwwweeerrrttt1234561222978', 'date': '2021-03-07', 'shortLink': 'https://cutt.ly/cs1948', 'title': 'Example Domain'}
---- Shortened URL: https://cutt.ly/cs1948
+--- Command Line: ['ex1-cutt.ly.py', 'https://docs.google.com/document/d/e/2PACX-1vSGOa_JPD28lJBVwxM7eaoXVJz-wkGsYXiiTe7rnnxCRs6SJwMdqaOeYLup9W-6nmG6y7jb6_BehI4K/pub', 'pythonShort']
+
+--- api_url:  https://cutt.ly/api/api.php?key=123456789123456789123456789&short=https://docs.google.com/document/d/e/2PACX-1vSGOa_JPD28lJBVwxM7eaoXVJz-wkGsYXiiTe7rnnxCRs6SJwMdqaOeYLup9W-6nmG6y7jb6_BehI4K/pub&name=pythonShort
+
+--- data:  {'status': 7, 'fullLink': 'https://docs.google.com/document/d/e/2PACX-1vSGOa_JPD28lJBVwxM7eaoXVJz-wkGsYXiiTe7rnnxCRs6SJwMdqaOeYLup9W-6nmG6y7jb6_BehI4K/pub', 'date': '2021-03-22', 'shortLink': 'https://cutt.ly/pythonShort', 'title': 'Python Web Crawler'}
+
+--- Shortened URL: https://cutt.ly/pythonShort
 ```

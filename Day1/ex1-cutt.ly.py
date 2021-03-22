@@ -8,17 +8,18 @@
 import requests
 import sys
 
-print("--- 命令行参数:", sys.argv)
+print("--- Command Line:", sys.argv)
 # print(len(sys.argv) )
 if len(sys.argv) < 2:
     # expect 2 or 3 arguments: cmd, url, [short name]
-    print(f"用法: {sys.argv[0]} full_long_url [short_name]")
+    print(f"Usage: {sys.argv[0]} full_long_url [short_name]")
     exit(1)
 
 # get the URL you want to shorten from cmd line
 url = sys.argv[1]
 
-api_key = "e77a2e10762f46d8be84d47974d4703310301"
+# fake key! replace this API key with your own, find yours in your profile in cutt.ly
+api_key = "123456789123456789123456789"
 
 # construct the API URL to call
 if len(sys.argv) >= 3:
@@ -32,8 +33,11 @@ else:
 print("--- api_url: ", api_url)
 
 # make the request
-data = requests.get(api_url).json()["url"]
+response = requests.get(api_url)
+print("--- response: ", response)
+print("--- response.json: ", response.json())
 
+data = response.json()["url"]
 print ("--- data: ", data)
 
 if data["status"] == 7:
