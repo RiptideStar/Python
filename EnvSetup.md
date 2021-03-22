@@ -1,13 +1,13 @@
 ## Env Installation:
 
 ### From Linux or MacOS Terminal: 
-1. Install Python 3.8.x (Note: Not 3.9.x because tensorflow does not support 3.9 yet)
+1. Install Python 3.x (Note: Not 3.9.x because tensorflow does not support 3.9 yet)
 2. Install Package Installer for Python - pip : https://pip.pypa.io/en/stable/installing/
 3. Install Image Processing Library - OpenCV : `pip install opencv-python`
 4. Install AI Library - TensorFlow : `pip install tensorflow` (Note: on windows, you have to enable `windows long path enable`)
 
 ### From Windows / Mac:
-* Set up Python 3.8.x envs using 
+* Set up Python 3.x envs using 
   * PyCharm https://www.jetbrains.com/pycharm/
   * VS Code https://code.visualstudio.com/docs/languages/python
   * Or any Python IDE you like
@@ -21,6 +21,7 @@
 * https://code.visualstudio.com/docs/python/settings-reference
 * https://code.visualstudio.com/docs/python/environments
 * https://code.visualstudio.com/docs/python/tutorial-flask
+* https://code.visualstudio.com/docs/editor/userdefinedsnippets
 
 ### Python Programming in PyCharm
 * https://www.jetbrains.com/pycharm/
