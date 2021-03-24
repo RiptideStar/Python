@@ -2,6 +2,7 @@ import requests
 import sys
 from bs4 import BeautifulSoup     # For html passer
 import xlwt  # pip install xlwt
+import sqlite3
 
 print("--- Command Line:", sys.argv)
 
@@ -46,9 +47,10 @@ def retrieveData(api_url):
     return datalist    
 
 datalist = retrieveData(api_url)
+# print(datalist)
 
 # save to excel
-def saveData(datalist, savepath):
+def saveToExcel(datalist, savepath):
     print('saving .......')
     # create a workbook
     book = xlwt.Workbook(encoding='utf-8', style_compression=0)
@@ -73,4 +75,51 @@ def saveData(datalist, savepath):
     # save the excel book
     book.save(savepath)
 
-saveData(datalist, "autismUniExcelBook1.xls")
+# saveToExcel(datalist, "autismUniExcelBook1.xls")
+
+def saveToDataBase(datalist, dbpath):
+    init_db(dbpath)
+    conn = sqlite3.connect(dbpath)
+    cur = conn.cursor()
+    for data in datalist:
+        # print(data)
+        for index in range(len(data)):
+            if index == 2:
+                continue
+            data[index] = '"'+data[index]+'"'
+            print(data[index])
+        sql = '''
+                insert into autism_universities(
+                univ_name,location,ranking,description,url,source_url)
+                values (?,?,?,?,?,?)'''
+        # print(sql)    
+        cur.execute(sql, (data[0],data[1],data[2],data[3],data[4],data[5]))
+        conn.commit()
+    cur.close
+    conn.close()
+
+
+
+def init_db(dbpath):
+    sql = '''
+        create table autism_universities
+        (
+        id integer primary key autoincrement,
+        univ_name varchar,
+        location varchar,
+        ranking integer,
+        description text,
+        url text,
+        source_url text,
+        misc text
+        );
+    '''      # 创建数据表
+    conn = sqlite3.connect(dbpath)
+    c = conn.cursor()
+    c.execute(sql)
+    conn.commit()
+    conn.close()
+
+
+# init_db("myDB.db")    
+saveToDataBase(datalist, 'myDB.db')
