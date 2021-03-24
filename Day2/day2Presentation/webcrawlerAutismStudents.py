@@ -2,6 +2,7 @@ import requests
 import sys
 from bs4 import BeautifulSoup  #html passer
 import xlwt #pip install xlwt
+import sqlite3
 #pip list | grep requests
 
 print("--- Command Line:", sys.argv)
@@ -23,7 +24,7 @@ def retrieveData(api_url):
     # parsing html with BS
     soup = BeautifulSoup(html, 'html.parser')
 
-    elements = soup.findChild("ol", id="accordion-rankings-184224").findChildren("li")
+    elements = soup.findChild("ol").findChildren("li")
 
     datalist = []
     for i in range(0, len(elements)):
@@ -51,7 +52,7 @@ def retrieveData(api_url):
 datalist = retrieveData(api_url)
 
 # save to excel
-def saveData(datalist, name):
+def saveToExcel(datalist, name):
 
     #create book
     book = xlwt.Workbook(encoding='utf-8', style_compression=0)
@@ -75,4 +76,48 @@ def saveData(datalist, name):
     #save the book to a file
     book.save(name)      
 
-saveData(datalist, "UniForStudentswAutism1.xls")      
+# saveToExcel(datalist, "UniForStudentswAutism1.xls")
+
+
+def init_db(name):
+    sql = '''
+        create table autism_universities
+        (
+            id integer primary key autoincrement,
+            univ_name varchar,
+            location varchar,
+            ranking integer,
+            description text,
+            url text,
+            source_url text,
+            misc text
+        );
+        '''
+    conn = sqlite3.connect(name)
+    c = conn.cursor()
+    c.execute(sql)
+    conn.commit()
+    conn.close()
+
+def saveToDataBase(datalist, name):
+    init_db(name)
+    conn = sqlite3.connect(name)
+    cur = conn.cursor()
+    for data in datalist:
+        for index in range(len(data)):
+            if index == 2:
+                continue
+            data[index] = '"'+data[index]+'"'
+            print(data[index])
+        sql = '''
+            insert into autism_universities(
+                univ_name, location, ranking, description, url, source_url
+            )
+            values (?,?,?,?,?,?)
+            '''
+        cur.execute(sql, (data[0], data[1], data[2], data[3], data[4], data[5]))
+        conn.commit()
+    cur.close
+    conn.close()
+
+saveToDataBase(datalist, "autismUniversitiesDB.db")  
