@@ -202,7 +202,7 @@ def Init_db(dbpath):
     sql = '''
         create table movie250
         (
-        id interger primary key autoincrement,
+        id integer primary key autoincrement,
         info_link text,
         pic_link text,
         cname varchar,
