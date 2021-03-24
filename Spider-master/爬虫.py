@@ -221,11 +221,6 @@ def Init_db(dbpath):
 
 
 
-
-
-
-
-
 if __name__ == "__main__":
     main()
     print('*'*20)
