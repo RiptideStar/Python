@@ -1,7 +1,7 @@
 # Learn Python, Web Crawlers, Website Creation & Data Visualization with Hands-on Projects:
 In 5 sessions, we will be learning Python,  web crawlers, website creation & data visualization thru a few hands-on projects coding together. 
 
-Times:  
+Times: (2021 Spring)
 * March 22 to 26 (Monday to Friday) 12:15pm to 1:45 pm PDT
 * March 28 (Sunday) 4:00 - 5:30pm PDT
 
