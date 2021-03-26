@@ -108,7 +108,7 @@ def saveToDataBase(datalist, name):
             if index == 2:
                 continue
             data[index] = '"'+data[index]+'"'
-            print(data[index])
+            # print(data[index])
         sql = '''
             insert into autism_universities(
                 univ_name, location, ranking, description, url, source_url
